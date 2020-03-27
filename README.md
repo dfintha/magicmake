@@ -1,36 +1,31 @@
 # magicmake
 
-## purpose
-this is a GNU makefile, which explores the src folder, collects various sources,
+## Short Description
+This is a GNU makefile, which explores the src folder, collects source files,
 and provides various targets without the hassle to expand it when a new file or
-subfolder is added
+subfolder is added.
+Each source file will be compiled into an object file, and object files will be
+linked together into a single source.
 
-## supported languages
-* Assembly (.s)
+## Supported Languages
+* x86 Assembly (.s)
 * C (.c)
 * C++ (.cpp)
 * FORTRAN (.f)
 * COBOL (.cob)
 
-## targets
-* all: creates the executable file
-* clean: deletes build results
-* run: runs the built executable
-* debugger: runs the build executable in a debugger
-* loc: displays lines of code
+## Targets
+* all: Creates the executable file.
+* clean: Deletes build result and artifacts.
+* run: Runs the built executable.
+* debugger: Runs the build executable in a debugger.
+* loc: Displays the amount of lines of code in the project.
 
-## todos
-* reformat the output for something more fashionable
-  (but still in 16 colors and ASCII), with colors
-* add targets for debug and release executables
-* add targets to install/uninstall
+## To-Do
+* Reformat the output for something more fashionable (in 16 colors).
+* Add targets for debug and release executables.
+* Add targets to install/uninstall.
 
-## ideas
-a tool might be made, which generates such makefiles with parametric
-customization, like choosing which languages, what file extensions, and which
-toolchains will be used, and toggling some optional features on or off, such as
-colorization, etc.
-
-## license
-this work is under the 'do what the fuck you want to public license'
+## License
+This work is under the 'Do What the Fuck You Want To Public License' or WTFPL.
 
