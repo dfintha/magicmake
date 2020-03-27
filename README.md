@@ -22,7 +22,6 @@ linked together into a single source.
 * loc: Displays the amount of lines of code in the project.
 
 ## To-Do
-* Reformat the output for something more fashionable (in 16 colors).
 * Add targets for debug and release executables.
 * Add targets to install/uninstall.
 

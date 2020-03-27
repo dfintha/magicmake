@@ -46,59 +46,65 @@ SOURCES=$(SOURCES_ASM) $(SOURCES_C) $(SOURCES_CXX) \
 OBJECTS=$(OBJECTS_ASM) $(OBJECTS_C) $(OBJECTS_CXX) \
 		$(OBJECTS_FORTRAN) $(OBJECTS_COBOL)
 
+# Color Constants
+RED=`tput setaf 1 ; tput bold`
+GREEN=`tput setaf 2`
+BLUE=`tput setaf 4 ; tput bold`
+LGREEN=`tput setaf 2 ; tput bold`
+NORMAL=`tput sgr0`
+
 # ---------------------------------------------------------------------------- #
 
 .PHONY: all loc run clean debugger
 
 all: bin/$(BINARY)
-	@printf "Build succeeded!\n"
 
 loc:
 	@printf "Lines of code in project: %s.\n" `cat $(SOURCES) | wc -l`
 
 run: bin/$(BINARY)
-	@printf "Running executable $<\n"
+	@printf "$(BLUE)Running executable $<$(NORMAL)\n"
 	@bin/$(BINARY)
 
 debugger: bin/$(BINARY)
-	@printf "Starting debugger for executable $<\n"
+	@printf "$(BLUE)Starting debugger for executable $<$(NORMAL)\n"
 	@$(DEBUGGER) bin/$(BINARY)
 
 bin/$(BINARY): $(OBJECTS_ASM) $(OBJECTS_C) $(OBJECTS_CXX) \
 				$(OBJECTS_FORTRAN) $(OBJECTS_COBOL)
 	@mkdir -p $(shell dirname $@)
-	@printf "Linking executable $@\n"
+	@printf "$(LGREEN)Linking executable $@$(NORMAL)\n"
 	@$(LINKER) $(OBJECTS) $(LFLAGS) $(LLIBS) -o $@
 	@strip $@
 
 obj/%.s.o: src/%.s
 	@mkdir -p $(shell dirname $@)
-	@printf "Building x86 Assembly object $@\n"
+	@printf "$(GREEN)Building x86 Assembly object $@$(NORMAL)\n"
 	@$(COMPILER_ASM) $(CFLAGS_ASM) $< -o $@
 
 obj/%.c.o: src/%.c
 	@mkdir -p $(shell dirname $@)
-	@printf "Building C object $@\n"
+	@printf "$(GREEN)Building C object $@$(NORMAL)\n"
 	@$(COMPILER_C) $(CFLAGS_C) $(CFLAGS_SHARED) -c $< -o $@
 
 obj/%.cpp.o: src/%.cpp
 	@mkdir -p $(shell dirname $@)
-	@printf "Building C++ object $@\n"
+	@printf "$(GREEN)Building C++ object $@$(NORMAL)\n"
 	@$(COMPILER_CXX) $(CFLAGS_CXX) $(CFLAGS_SHARED) -c $< -o $@
 
 obj/%.f.o: src/%.f
 	@mkdir -p $(shell dirname $@)
-	@printf "Building FORTRAN object $@\n"
+	@printf "$(GREEN)Building FORTRAN object $@$(NORMAL)\n"
 	@$(COMPILER_FORTRAN) $(CFLAGS_FORTRAN) -c $< -o $@
 
 obj/%.cob.o: src/%.cob
 	@mkdir -p $(shell dirname $@)
-	@printf "Building COBOL object $@\n"
+	@printf "$(GREEN)Building COBOL object $@$(NORMAL)\n"
 	@$(COMPILER_COBOL) $(CFLAGS_COBOL) -c $< -o $@
 
 clean:
-	@printf "Removing directory bin\n"
+	@printf "$(RED)Removing directory bin$(NORMAL)\n"
 	@rm -rf bin
-	@printf "Removing directory obj\n"
+	@printf "$(RED)Removing directory obj$(NORMAL)\n"
 	@rm -rf obj
 
